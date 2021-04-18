@@ -7,7 +7,7 @@
 import warnings
 warnings.filterwarnings('ignore')
 import pandas as pd
-olympics=pd.read_csv("olympic_hosts.csv")
+olympics=pd.read_csv("Downloads/olympic_hosts.csv")
 
 
 # In[2]:
@@ -63,16 +63,16 @@ for country in countries:
 # In[7]:
 
 
-gdpc = pd.read_csv('gdp_per_capita.csv')
+gdpc = pd.read_csv('Downloads/gdp_per_capita.csv')
 olympics['gdpc'] = [0 for i in range(len(olympics))]
 
-fin = pd.read_csv('fin_data.csv')
+fin = pd.read_csv('Downloads/fin_data.csv')
 olympics['FinStability'] = [0 for i in range(len(olympics))]
 
-freedom = pd.read_csv('freedom.csv')
+freedom = pd.read_csv('Downloads/freedom.csv')
 olympics['Freedom'] = [0 for i in range(len(olympics))]
 
-polit = pd.read_csv('polit.csv')
+polit = pd.read_csv('Downloads/polit.csv')
 olympics['PolitStability'] = [0 for i in range(len(olympics))]
 
 
@@ -151,5 +151,5 @@ olympics
 # In[15]:
 
 
-olympics.to_csv("olympics.csv")
+olympics.to_csv("Downloads/olympics.csv")
 
