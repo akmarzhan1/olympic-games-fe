@@ -6,6 +6,21 @@ import delimited /Users/akmarzhan/Downloads/ss154_data_collection/olympics.csv
 
 gen log_gdp = log(gdp)
 
+esttab, modelwidth(10 20) cell((mean(label(Mean)) sd(par label(Standard Deviation)))) label nomtitle nonumber
+
+----------------------------------------------------
+                           Mean   Standard Deviation
+----------------------------------------------------
+log_gdp                28.29461           (1.174835)
+Host                   .0666667           (.2504897)
+Freedom                64.50917           (11.12917)
+FinStability           14.16443           (7.328822)
+PolitStability         .1103984           (.6358766)
+Subtype                      .5           (.5020964)
+----------------------------------------------------
+Observations                120                     
+----------------------------------------------------
+
 regr log_gdp host, robust
 ----------------------------
                       (1)   
