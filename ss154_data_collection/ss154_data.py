@@ -1,30 +1,30 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[68]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 import pandas as pd
-olympics=pd.read_csv("Downloads/olympic_hosts.csv")
+olympics=pd.read_csv("Downloads/ss154_data_collection/data/olympic_hosts.csv")
 
 
-# In[2]:
+# In[69]:
 
 
 olympics.drop(olympics[olympics.Type=='youthgames'].index, inplace=True)
 olympics.drop(olympics[olympics.Year>=2018].index, inplace=True)
-olympics.drop(olympics[olympics.Year<1996].index, inplace=True)
+olympics.drop(olympics[olympics.Year<2002].index, inplace=True)
 
 
-# In[3]:
+# In[70]:
 
 
 olympics = olympics.drop_duplicates(subset=['Country'], keep=False)
 
 
-# In[4]:
+# In[71]:
 
 
 countries = olympics['Country'].to_numpy()
@@ -35,7 +35,7 @@ def generate_id(country):
 olympics['id'] = olympics['Country'].apply(generate_id)
 
 
-# In[5]:
+# In[72]:
 
 
 olympics["Host"] = [1 for i in range(len(countries))]
@@ -45,10 +45,10 @@ olympics = olympics[['Country', 'Year', 'id', 'Subtype', 'Host']]
 olympics
 
 
-# In[6]:
+# In[73]:
 
 
-years = olympics['Year'].unique()
+years = np.arange(min(olympics['Year'].unique()), max(olympics['Year'].unique())+1, 1)
 
 for country in countries:
     host_year = olympics[olympics.Country==country].Year.to_numpy()
@@ -60,32 +60,36 @@ for country in countries:
             olympics = olympics.append({'Country': country, 'Year': year, 'id': host_id, 'Subtype': host_type, 'Host': 0}, ignore_index=True)
 
 
-# In[7]:
+# In[74]:
 
 
-gdpc = pd.read_csv('Downloads/gdp_per_capita.csv')
-olympics['gdpc'] = [0 for i in range(len(olympics))]
+gdp = pd.read_csv('Downloads/ss154_data_collection/data/gdp.csv')
+olympics['gdp'] = [0 for i in range(len(olympics))]
 
-fin = pd.read_csv('Downloads/fin_data.csv')
+fin = pd.read_csv('Downloads/ss154_data_collection/data/fin_data.csv')
 olympics['FinStability'] = [0 for i in range(len(olympics))]
 
-freedom = pd.read_csv('Downloads/freedom.csv')
+freedom = pd.read_csv('Downloads/ss154_data_collection/data/freedom.csv')
 olympics['Freedom'] = [0 for i in range(len(olympics))]
 
-polit = pd.read_csv('Downloads/polit.csv')
+polit = pd.read_csv('Downloads/ss154_data_collection/data/polit.csv')
 olympics['PolitStability'] = [0 for i in range(len(olympics))]
 
+pop = pd.read_csv('Downloads/ss154_data_collection/data/pop.csv')
+olympics['Population'] = [0 for i in range(len(olympics))]
 
-# In[8]:
+
+# In[75]:
 
 
 for country in countries:
     for year in years:
         idx = olympics.loc[(olympics.Country==country) & (olympics.Year==year)].index
-        olympics['gdpc'][idx] = gdpc[gdpc['Country Name']==country][str(year)].to_numpy()[0]
+        olympics['gdp'][idx] = gdp[gdp['Country Name']==country][str(year)].to_numpy()[0]
+        
 
 
-# In[9]:
+# In[76]:
 
 
 for country in countries:
@@ -94,7 +98,7 @@ for country in countries:
         olympics['FinStability'][idx] = fin[(fin['country']==country)&(fin['year']==year)]['gfddsi01'].to_numpy()[0]
 
 
-# In[10]:
+# In[77]:
 
 
 for country in countries:
@@ -103,7 +107,17 @@ for country in countries:
         olympics['Freedom'][idx] = freedom[(freedom['Name']==country)&(freedom['Index Year']==year)]['Overall Score'].to_numpy()[0]
 
 
-# In[11]:
+# In[78]:
+
+
+for country in countries:
+    for year in years:
+        idx = olympics.loc[(olympics.Country==country) & (olympics.Year==year)].index
+        olympics['Population'][idx] = pop[pop['Country Name']==country][str(year)].to_numpy()[0]
+        
+
+
+# In[79]:
 
 
 for country in countries:
@@ -114,7 +128,7 @@ for country in countries:
 olympics
 
 
-# In[12]:
+# In[80]:
 
 
 import numpy as np 
@@ -132,24 +146,40 @@ for idx in indices:
 olympics
 
 
-# In[13]:
+# In[81]:
 
 
-one_hot = pd.get_dummies(olympics[olympics.Diff<=0].Diff, prefix='lead')
-two_hot = pd.get_dummies(olympics[olympics.Diff>=0].Diff, prefix='lag')
+one_hot = pd.get_dummies(olympics[olympics.Diff<0].Diff, prefix='lead')
+two_hot = pd.get_dummies(olympics[olympics.Diff>0].Diff, prefix='lag')
 olympics = pd.concat([olympics, one_hot, two_hot], axis=1)
 olympics = olympics.fillna(0)
 
 
-# In[14]:
+# In[82]:
 
 
 olympics = olympics.sort_values(by=['id', 'Year'])
 olympics
 
 
-# In[15]:
+# In[83]:
 
 
-olympics.to_csv("Downloads/olympics.csv")
+olympics.to_csv("Downloads/ss154_data_collection/olympics.csv")
+
+
+# In[84]:
+
+
+olympics_winter = olympics[olympics.Subtype==0]
+olympics_summer = olympics[olympics.Subtype==1]
+
+olympics_winter.to_csv("Downloads/ss154_data_collection/olympics_winter.csv")
+olympics_summer.to_csv("Downloads/ss154_data_collection/olympics_summer.csv")
+
+
+# In[ ]:
+
+
+
 
