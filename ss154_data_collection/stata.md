@@ -9,7 +9,7 @@
 
 `gen log_gdp = log(gdp)`
 
-regr log_gdp host, robust
+`regr log_gdp host, robust
 ----------------------------
                       (1)   
                   log_gdp   
@@ -23,9 +23,9 @@ _cons               28.29***
 N                     120   
 ----------------------------
 Standard errors in parentheses
-* p<0.05, ** p<0.01, *** p<0.001
+* p<0.05, ** p<0.01, *** p<0.001`
 ￼
-regr log_gdp host subtype finstability politstability freedom, robust
+`regr log_gdp host subtype finstability politstability freedom, robust
 ----------------------------
                       (1)   
                   log_gdp   
@@ -51,13 +51,14 @@ _cons               23.84***
 N                     120   
 ----------------------------
 Standard errors in parentheses
-* p<0.05, ** p<0.01, *** p<0.001
+* p<0.05, ** p<0.01, *** p<0.001`
 
 ￼
 
 `xtset id year`
 
-xtreg log_gdp host, fe vce(cluster id)
+
+`xtreg log_gdp host, fe vce(cluster id)
 ----------------------------
                       (1)   
                   log_gdp   
@@ -74,7 +75,7 @@ Standard errors in parentheses
 * p<0.05, ** p<0.01, *** p<0.001
 ￼
 
-xtreg log_gdp host subtype finstability politstability freedom, fe vce(cluster id)
+`xtreg log_gdp host subtype finstability politstability freedom, fe vce(cluster id)
 ----------------------------
                       (1)   
                   log_gdp   
@@ -100,10 +101,10 @@ _cons               30.22***
 N                     120   
 ----------------------------
 Standard errors in parentheses
-* p<0.05, ** p<0.01, *** p<0.001
+* p<0.05, ** p<0.01, *** p<0.001`
 ￼
 
-xtreg log_gdp i.year host, fe vce(cluster id)
+`xtreg log_gdp i.year host, fe vce(cluster id)
 ----------------------------
                       (1)   
                   log_gdp   
@@ -117,12 +118,12 @@ _cons               27.58***
 N                     120   
 ----------------------------
 Standard errors in parentheses
-* p<0.05, ** p<0.01, *** p<0.001
+* p<0.05, ** p<0.01, *** p<0.001`
 ￼
 
 * subtype omitted 
 
-xtreg log_gdp i.year host subtype finstability politstability freedom, fe vce(cluster id)
+`xtreg log_gdp i.year host subtype finstability politstability freedom, fe vce(cluster id)
 ----------------------------
                       (1)   
                   log_gdp   
@@ -148,7 +149,7 @@ _cons               25.95***
 N                     120   
 ----------------------------
 Standard errors in parentheses
-* p<0.05, ** p<0.01, *** p<0.001
+* p<0.05, ** p<0.01, *** p<0.001`
 ￼
 
 `xtreg log_gdp i.year lead_14 -lead_1 lag_1-lag_14, fe vce(cluster id)`
