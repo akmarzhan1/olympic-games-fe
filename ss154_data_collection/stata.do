@@ -256,3 +256,5 @@ ssc install coefplot
 
 coefplot, keep(lead_14 lead_13 lead_12 lead_11 lead_10 lead_9 lead_8 lead_7 lead_6 lead_5 lead_4 lead_3 lead_2 lead_1 lag_1 lag_2 lag_3 lag_4 lag_5 lag_6 lag_7 lag_8 lag_9 lag_10 lag_11 lag_12 lag_13 lag_14) xlabel(, angle(vertical)) yline(0) xline(14.5) vertical msymbol(D) mfcolor(white) ciopts(lwidth(*2) lcolor(*.5)) mlabel format(%9.2f) mlabposition(12) mlabgap(*2) mlabsize(vsmall) ytitle(Log of GDP per capita)
 ￼
+#graphing
+xtline log_gdpc, overlay t(year) i(country) legend() scheme(s2mono) ytitle(Log of GDP per capita)  xline(2002, lcolor(blue) lpattern(dash) lwidth(0.2)) xline(2004, lcolor(red) lpattern(dash) lwidth(0.2)) xline(2006, lcolor(blue) lpattern(dash) lwidth(0.2)) xline(2008, lcolor(red) lpattern(dash) lwidth(0.2)) xline(2010, lcolor(blue) lpattern(dash) lwidth(0.2)) xline(2012, lcolor(red) lpattern(dash) lwidth(0.2)) xline(2014, lcolor(blue) lpattern(dash) lwidth(0.2)) xline(2016, lcolor(red) lpattern(dash) lwidth(0.2))
