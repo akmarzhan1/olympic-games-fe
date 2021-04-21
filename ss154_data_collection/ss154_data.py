@@ -98,7 +98,7 @@ diff = []
 olympics['Diff']= [0 for i in range(len(olympics))]
 indices = olympics.index.to_numpy()
 for idx in indices:
-    host_year = olympics[(olympics.Country == olympics.iloc[idx].Country) & (olympics.Post<1)].Year.to_numpy()[0]-1
+    host_year = olympics[(olympics.Country == olympics.iloc[idx].Country) & (olympics.Post<1)].Year.to_numpy()[0]
     olympics['Diff'][idx]=olympics.iloc[idx].Year - host_year
 
 #adding dummy
