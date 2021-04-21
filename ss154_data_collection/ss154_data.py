@@ -83,10 +83,7 @@ olympics['Diff']= [0 for i in range(len(olympics))]
 indices = olympics.index.to_numpy()
 for idx in indices:
     host_year = olympics[(olympics.Country == olympics.iloc[idx].Country) & (olympics.Post==1)].Year.to_numpy()[0]
-    if olympics.iloc[idx].Post==1:
-        olympics['Diff'][idx]=0
-    else:
-        olympics['Diff'][idx]=olympics.iloc[idx].Year - host_year
+    olympics['Diff'][idx]=olympics.iloc[idx].Year - host_year
 
 #adding dummy
 one_hot = pd.get_dummies(olympics[olympics.Diff<0].Diff, prefix='lead')
