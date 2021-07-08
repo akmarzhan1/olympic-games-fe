@@ -1,3 +1,7 @@
-## ss154-fp
+# Effect of Hosting Olympic Games on Prosperity: An Empirical Study using Two-Way Fixed Effects
 
-This repo contains the data that we collected for the SS154 final project.
+In this paper, we studied the effect of hosting the Olympic Games on the host country’s GDP per capita. Several studies have explored a similar link, but the results weren’t consistent, which is why it is of interest to explore this topic further to compare the results. The paper uses the two-way fixed effects model with differential timing for the treatment to take care of the nature of the data and the events (i.e., different countries hosted the Olympics throughout different periods). There are 3 main methods used to explore the connection between hosting and prosperity proxied by GDP per capita, including a simple pooled OLS regression, one-way fixed effects, and two-way fixed effects models that include and exclude the confounding variables we controlled for. We found a small positive effect (i.e., 1.005-1.016 times increase) on GDP per capita for the combined dataset using two-way fixed effects. Interestingly, in the uncontrolled version, the Summer Olympic Games showed a larger positive effect (i.e., 1.2 times increase). In contrast, the Winter Olympic Games showed a negative effect (i.e., multiplication by 0.873, or a 13% reduction). However, the results weren’t significant, which is why we proposed using a different method called synthetic difference in differences to explore this question further.
+
+**Keywords:** *Difference-in-Difference (DD), Two-Way Fixed Effects, Olympic Games, Synthetic Difference-in-Differences, Prosperity*
+
+Check out the pdf file in the main folder to see the whole study and the results. 
